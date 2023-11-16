@@ -19,14 +19,16 @@ public class CommentService {
 
     private List<Comment> CommentList = new ArrayList<>();
     Long a=0L;
-    public Comment CreateCommentToEnity(CommentCreateRequest createRequest){
-        return Comment.builder()
-                .id(a++)
+    public Comment CreateCommentToEnity(CommentCreateRequest createRequest,Long postid){
+        Comment comment= Comment.builder()
+
                 .content(createRequest.getContent())
-                .postid(createRequest.getPostid())
+                .postid(postid)
                 .userid(createRequest.getUserid())
-                .createdAt(LocalDateTime.now())
                 .build();
+        comment.setId(a++);
+        comment.setCreatedAt(LocalDateTime.now());
+        return comment;
     }
 
     public CommentInfo MapCommentEntityToCommetInfo(Comment comment){
@@ -37,8 +39,8 @@ public class CommentService {
                 .build();
 
     }
-    public CommentInfo CreateComment(CommentCreateRequest createRequest){
-        Comment comment = CreateCommentToEnity(createRequest);
+    public CommentInfo CreateComment(CommentCreateRequest createRequest,Long postid){
+        Comment comment = CreateCommentToEnity(createRequest,postid);
         CommentList.add(comment);
         CommentInfo commentInfo=MapCommentEntityToCommetInfo(comment);
         return commentInfo;

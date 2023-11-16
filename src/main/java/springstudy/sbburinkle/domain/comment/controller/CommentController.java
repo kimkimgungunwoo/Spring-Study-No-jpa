@@ -28,7 +28,7 @@ public class CommentController {
             @RequestBody CommentCreateRequest request,
             @PathVariable Long postid)
     {
-        CommentInfo commentInfo=commentservice.CreateComment(request);
+        CommentInfo commentInfo=commentservice.CreateComment(request,postid);
         return ResponseEntity.ok(ResultResponse.of(CREAT_COMMENT_SUCCESS,commentInfo));
     }
 

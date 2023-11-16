@@ -16,6 +16,5 @@ import java.time.LocalDateTime;
 public class CommentCreateRequest {
     private final String content;
     private final Long userid;
-    private final Long postid;
 
 }
