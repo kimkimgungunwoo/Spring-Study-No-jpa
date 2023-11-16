@@ -1,5 +1,6 @@
 package springstudy.sbburinkle.domain.comment.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +15,11 @@ import java.time.LocalDateTime;
 @Getter
 @RequiredArgsConstructor
 public class CommentCreateRequest {
+
+    @JsonProperty("content")
     private final String content;
+
+    @JsonProperty("userid")
     private final Long userid;
 
 }

@@ -22,7 +22,6 @@ import static springstudy.sbburinkle.global.result.ResultCode.GET_ALL_COMMENT_SU
 @RequestMapping("/api/comment")
 public class CommentController {
     private final CommentService commentservice;
-
     @PostMapping("/{postid}")
     public ResponseEntity<ResultResponse> createComment(
             @RequestBody CommentCreateRequest request,

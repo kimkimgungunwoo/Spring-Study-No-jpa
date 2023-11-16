@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class CommentService {
 
     private List<Comment> CommentList = new ArrayList<>();
@@ -34,7 +33,7 @@ public class CommentService {
     public CommentInfo MapCommentEntityToCommetInfo(Comment comment){
         return CommentInfo.builder()
                 .content(comment.getContent())
-                .user_id(comment.getUserid())
+                .userid(comment.getUserid())
                 .CreateAt(comment.getCreatedAt())
                 .build();
 
@@ -53,7 +52,7 @@ public class CommentService {
             if(CommentList.get(i).getPostid().equals(postid)){
                 CommentInfoList.add(CommentInfo.builder()
                         .content(CommentList.get(i).getContent())
-                        .user_id(CommentList.get(i).getUserid())
+                        .userid(CommentList.get(i).getUserid())
                         .CreateAt(CommentList.get(i).getCreatedAt())
                         .build());
             }
@@ -68,7 +67,7 @@ public class CommentService {
                 userCommetList.add(CommentInfo.builder()
                             .content(CommentList.get(i).getContent())
                             .CreateAt(CommentList.get(i).getCreatedAt())
-                            .user_id(CommentList.get(i).getUserid())
+                            .userid(CommentList.get(i).getUserid())
                         .build()
                 );
             }
