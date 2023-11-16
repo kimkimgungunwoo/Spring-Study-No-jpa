@@ -8,6 +8,8 @@ import springstudy.sbburinkle.domain.post.entity.Post;
 import springstudy.sbburinkle.domain.user.entity.User;
 import springstudy.sbburinkle.global.common.BaseEntity;
 
+import java.time.LocalDateTime;
+
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,13 +19,17 @@ public class Comment extends BaseEntity {
     private String content;
     private Long postid;
     private Long userid;
-
+    private LocalDateTime createdAt;
     @Builder
     public Comment(String content,
                    Long postid,
-                   Long userid){
+                   Long userid,
+                   LocalDateTime createdAt,
+                   Long id){
         this.content=content;
         this.postid=postid;
         this.userid=userid;
+        this.createdAt=createdAt;
+        this.id=id;
     }
 }

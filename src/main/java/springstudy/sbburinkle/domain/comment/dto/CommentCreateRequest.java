@@ -14,9 +14,8 @@ import java.time.LocalDateTime;
 @Getter
 @RequiredArgsConstructor
 public class CommentCreateRequest {
-    private String title;
-    private User user;
-    private Post post;
-    private LocalDateTime CreatedAt;
+    private final String content;
+    private final Long userid;
+    private final Long postid;
 
 }

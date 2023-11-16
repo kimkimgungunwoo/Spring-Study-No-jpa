@@ -1,8 +1,76 @@
 package springstudy.sbburinkle.domain.comment.service;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import springstudy.sbburinkle.domain.comment.dto.CommentCreateRequest;
+import springstudy.sbburinkle.domain.comment.dto.CommentInfo;
+import springstudy.sbburinkle.domain.comment.entity.Comment;
+import springstudy.sbburinkle.domain.comment.repository.CommentRepository;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class CommentService {
 
+    private List<Comment> CommentList = new ArrayList<>();
+    Long a=0L;
+    public Comment CreateCommentToEnity(CommentCreateRequest createRequest){
+        return Comment.builder()
+                .id(a++)
+                .content(createRequest.getContent())
+                .postid(createRequest.getPostid())
+                .userid(createRequest.getUserid())
+                .createdAt(LocalDateTime.now())
+                .build();
+    }
+
+    public CommentInfo MapCommentEntityToCommetInfo(Comment comment){
+        return CommentInfo.builder()
+                .content(comment.getContent())
+                .user_id(comment.getUserid())
+                .CreateAt(comment.getCreatedAt())
+                .build();
+
+    }
+    public CommentInfo CreateComment(CommentCreateRequest createRequest){
+        Comment comment = CreateCommentToEnity(createRequest);
+        CommentList.add(comment);
+        CommentInfo commentInfo=MapCommentEntityToCommetInfo(comment);
+        return commentInfo;
+
+    }
+
+    public List<CommentInfo> GetPostCommentList(Long postid){
+        List<CommentInfo> CommentInfoList=new ArrayList<>();
+        for(int i=0;i<CommentList.size();i++){
+            if(CommentList.get(i).getPostid().equals(postid)){
+                CommentInfoList.add(CommentInfo.builder()
+                        .content(CommentList.get(i).getContent())
+                        .user_id(CommentList.get(i).getUserid())
+                        .CreateAt(CommentList.get(i).getCreatedAt())
+                        .build());
+            }
+        }
+        return CommentInfoList;
+    }
+
+    public List<CommentInfo> GetUserCommentList(Long userid){
+        List<CommentInfo> userCommetList=new ArrayList<>();
+        for(int i=0;i<CommentList.size();i++) {
+            if (CommentList.get(i).getUserid().equals(userid)){
+                userCommetList.add(CommentInfo.builder()
+                            .content(CommentList.get(i).getContent())
+                            .CreateAt(CommentList.get(i).getCreatedAt())
+                            .user_id(CommentList.get(i).getUserid())
+                        .build()
+                );
+            }
+        }
+        return userCommetList;
+    }
 }
