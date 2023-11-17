@@ -18,7 +18,12 @@ public enum ResultCode {
     GET_ALL_POST_SUCCESS("P001","글 전체 조회 성공"),
     CREATE_POST_SUCCESS("P002","글 등록 성공"),
     GET_POST_SUCCESS("P003","글 조회 성공"),
-    GET_ALL_USER_POST_SUCCESS("P004","유저 글 리스트 조회 성공")
+    GET_ALL_USER_POST_SUCCESS("P004","유저 글 리스트 조회 성공"),
+
+    //유저 관련한 애들
+    GET_USER_SUCCESS("U001","유저 읽기 성공"),
+    CREATE_USER_SUCCESS("U002","유저생성성공"),
+    GET_ALL_USER_SUCCESS("U003","유저 모두 읽기 성공")
     ;
 
 
