@@ -22,7 +22,7 @@ import static springstudy.sbburinkle.global.result.ResultCode.GET_ALL_COMMENT_SU
 @RequestMapping("/api/comment")
 public class CommentController {
     private final CommentService commentservice;
-    @PostMapping("/{postid}")
+    @PostMapping("/post/{postid}")
     public ResponseEntity<ResultResponse> createComment(
             @RequestBody CommentCreateRequest request,
             @PathVariable Long postid)
@@ -31,7 +31,7 @@ public class CommentController {
         return ResponseEntity.ok(ResultResponse.of(CREAT_COMMENT_SUCCESS,commentInfo));
     }
 
-    @GetMapping("/{postid}")
+    @GetMapping("/post/{postid}")
     public ResponseEntity<ResultResponse> GetPostComment(
             @PathVariable Long postid
     ){
@@ -41,7 +41,7 @@ public class CommentController {
 
     }
 
-    @GetMapping("/{userid}")
+    @GetMapping("/user/{userid}")
     public ResponseEntity<ResultResponse> GetUserComment(
             @PathVariable Long userid
     ){

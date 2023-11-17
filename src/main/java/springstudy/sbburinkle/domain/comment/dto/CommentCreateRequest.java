@@ -11,15 +11,15 @@ import springstudy.sbburinkle.domain.user.entity.User;
 
 import java.time.LocalDateTime;
 
-@Builder
 @Getter
-@RequiredArgsConstructor
+@NoArgsConstructor
 public class CommentCreateRequest {
 
-    @JsonProperty("content")
-    private final String content;
-
-    @JsonProperty("userid")
-    private final Long userid;
-
+    private String content;
+    private Long userid;
+    @Builder
+    public CommentCreateRequest(String content,Long userid){
+        this.content=content;
+        this.userid=userid;
+    }
 }
