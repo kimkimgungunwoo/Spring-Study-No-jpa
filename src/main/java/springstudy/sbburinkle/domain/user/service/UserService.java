@@ -3,18 +3,22 @@ package springstudy.sbburinkle.domain.user.service;
 import org.springframework.stereotype.Service;
 import springstudy.sbburinkle.domain.user.dto.UserCreateRequest;
 import springstudy.sbburinkle.domain.user.dto.UserInfo;
+import springstudy.sbburinkle.domain.user.dto.UserLoginRequestInfo;
+import springstudy.sbburinkle.domain.user.dto.UserLoginResponseInfo;
 import springstudy.sbburinkle.domain.user.entity.User;
 
+import javax.servlet.http.HttpSession;
 import java.security.PublicKey;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class UserService {
+
+    private HttpSession session;
     List<User> userList=new ArrayList<>();
     Long id=0L;
+
     public User CreateReqeustToUserEntity(UserCreateRequest request){
         User user=User.builder()
                 .id(id++)
@@ -61,4 +65,23 @@ public class UserService {
         }
         return userInfoList;
     }
+
+    public User Login(UserLoginRequestInfo request){
+        Optional<User> optionalUser=userList.stream().
+                filter(User->User.getEmail().equals(request.getEmail())).findFirst();
+        if (optionalUser.isEmpty()){
+            return null;
+        }
+
+        User finduser=optionalUser.get();
+        if(!finduser.getPassword().equals(request.getPassword())){
+            return null;
+        }
+
+        return finduser;
+    }
+
+
+
+
 }
