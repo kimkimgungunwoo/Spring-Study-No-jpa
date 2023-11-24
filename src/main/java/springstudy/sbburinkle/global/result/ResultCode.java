@@ -25,7 +25,8 @@ public enum ResultCode {
     CREATE_USER_SUCCESS("U002","유저생성성공"),
     GET_ALL_USER_SUCCESS("U003","유저 모두 읽기 성공"),
     LOGIN_SUCCESS("U004","로그인 성공"),
-    LOGOUT_SUCCESS("U005","로그아웃 성공")
+    LOGOUT_SUCCESS("U005","로그아웃 성공"),
+    GET_LOGIN_USER_LIST_SUCCESS("U006","로그인된 유저 읽기 성공")
     ;
 
 
