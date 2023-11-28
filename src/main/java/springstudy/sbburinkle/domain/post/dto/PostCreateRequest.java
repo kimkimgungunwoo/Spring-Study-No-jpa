@@ -11,13 +11,11 @@ import springstudy.sbburinkle.domain.post.entity.Post;
 public class PostCreateRequest {
     private String title;
     private String content;
-    private Long userid;
 
     @Builder
-    public PostCreateRequest(String title,String content,Long userid){
+    public PostCreateRequest(String title,String content){
         this.title=title;
         this.content=content;
-        this.userid=userid;
     }
 
 }

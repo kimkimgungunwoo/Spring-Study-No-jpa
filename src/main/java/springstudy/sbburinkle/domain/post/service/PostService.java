@@ -15,11 +15,11 @@ public class PostService {
     private List<Post> postList = new ArrayList<>();
     Long a=0L;
 
-    public Post CreateRequestToPostEntity(PostCreateRequest request){
+    public Post CreateRequestToPostEntity(PostCreateRequest request,Long userId){
         Post post=Post.builder().
                 title(request.getTitle())
                 .content(request.getContent())
-                .userid(request.getUserid())
+                .userid(userId)
                 .build();
         post.setId(a++);
         post.setCreatedAt(LocalDateTime.now());
@@ -39,8 +39,8 @@ public class PostService {
         return postInfo;
     }
 
-    public PostInfo CreatePost(PostCreateRequest request){
-        Post post=CreateRequestToPostEntity(request);
+    public PostInfo CreatePost(PostCreateRequest request,Long userId){
+        Post post=CreateRequestToPostEntity(request,userId);
         postList.add(post);
         PostInfo postInfo=MapPostEntitiytoPostInfo(post);
         return postInfo;

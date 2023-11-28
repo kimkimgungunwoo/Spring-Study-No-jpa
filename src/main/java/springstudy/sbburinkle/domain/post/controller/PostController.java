@@ -35,10 +35,11 @@ public class PostController {
 
     @PostMapping
     public ResponseEntity<ResultResponse> CreatePost(
-            @RequestBody PostCreateRequest request
+            @RequestBody PostCreateRequest request,
+            @SessionAttribute(name="LoginUser",required = true) Long userId
             )
     {
-        PostInfo postInfo=postService.CreatePost(request);
+        PostInfo postInfo=postService.CreatePost(request,userId);
         return ResponseEntity.ok(ResultResponse.of(CREATE_POST_SUCCESS,postInfo));
     }
 
