@@ -1,10 +1,11 @@
 package springstudy.sbburinkle.domain.user.service;
 
 import org.springframework.stereotype.Service;
-import springstudy.sbburinkle.domain.user.dto.UserCreateRequest;
-import springstudy.sbburinkle.domain.user.dto.UserInfo;
-import springstudy.sbburinkle.domain.user.dto.UserLoginRequestInfo;
-import springstudy.sbburinkle.domain.user.dto.UserLoginResponseInfo;
+import springstudy.sbburinkle.domain.comment.dto.CommentInfo;
+import springstudy.sbburinkle.domain.comment.service.CommentService;
+import springstudy.sbburinkle.domain.post.dto.PostInfo;
+import springstudy.sbburinkle.domain.post.service.PostService;
+import springstudy.sbburinkle.domain.user.dto.*;
 import springstudy.sbburinkle.domain.user.entity.User;
 
 import javax.servlet.http.HttpSession;
@@ -14,7 +15,8 @@ import java.util.*;
 
 @Service
 public class UserService {
-
+    private PostService postService;
+    private CommentService commentService;
     private HttpSession session;
     List<User> userList=new ArrayList<>();
     Long id=0L;
@@ -79,6 +81,18 @@ public class UserService {
         }
 
         return finduser;
+    }
+
+    public UserMyPage GetUserPage(Long userId){
+        List<PostInfo> postInfoList=postService.GetAllUserPost(userId);
+        List<CommentInfo> CommentInfoList=commentService.GetUserCommentList(userId);
+        UserInfo findUser=GetUser(userId);
+        return UserMyPage.builder()
+                .email(findUser.getEmail())
+                .nickname(findUser.getNickname())
+                .UserPostList(postInfoList)
+                .UserCommentList(CommentInfoList)
+                .build();
     }
 
 

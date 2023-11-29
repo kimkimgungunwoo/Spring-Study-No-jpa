@@ -16,10 +16,9 @@ import java.time.LocalDateTime;
 public class CommentCreateRequest {
 
     private String content;
-    private Long userid;
     @Builder
-    public CommentCreateRequest(String content,Long userid){
+    public CommentCreateRequest(String content){
         this.content=content;
-        this.userid=userid;
+
     }
 }

@@ -5,10 +5,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.function.ServerRequest;
-import springstudy.sbburinkle.domain.user.dto.UserCreateRequest;
-import springstudy.sbburinkle.domain.user.dto.UserInfo;
-import springstudy.sbburinkle.domain.user.dto.UserLoginRequestInfo;
-import springstudy.sbburinkle.domain.user.dto.UserLoginResponseInfo;
+import springstudy.sbburinkle.domain.user.dto.*;
 import springstudy.sbburinkle.domain.user.entity.User;
 import springstudy.sbburinkle.domain.user.service.UserService;
 import springstudy.sbburinkle.global.result.ResultCode;
@@ -63,13 +60,6 @@ public class UserContoller {
 
     }
 
-    @GetMapping("/info")
-    public ResponseEntity<ResultResponse> Info(
-            @SessionAttribute(name="userid") Long userid){
-        UserInfo selfinfo=userService.GetUser(userid);
-        return ResponseEntity.ok(ResultResponse.of(GET_USER_SUCCESS,selfinfo));
-    }
-
     @GetMapping("/loginlist")
     public ResponseEntity<ResultResponse> LoginUserList(HttpServletRequest request) {
         List<UserLoginResponseInfo> loginUserInfoList = new ArrayList<>();
@@ -89,5 +79,12 @@ public class UserContoller {
         return ResponseEntity.ok(ResultResponse.of(GET_LOGIN_USER_LIST_SUCCESS, loginUserInfoList));
     }
 
+    @GetMapping("/MyPage")
+    public ResponseEntity<ResultResponse> MyPage(
+            @SessionAttribute(name="LoginUser",required = true) Long userId
+    ){
+        UserMyPage userMyPage=userService.GetUserPage(userId);
+        return ResponseEntity.ok(ResultResponse.of(GET_ALL_USER_POST_SUCCESS,userMyPage));
+    }
 
 }

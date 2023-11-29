@@ -25,9 +25,11 @@ public class CommentController {
     @PostMapping("/post/{postid}")
     public ResponseEntity<ResultResponse> createComment(
             @RequestBody CommentCreateRequest request,
-            @PathVariable Long postid)
+            @PathVariable Long postid,
+            @SessionAttribute(name="LoginUser",required = true) Long userId
+            )
     {
-        CommentInfo commentInfo=commentservice.CreateComment(request,postid);
+        CommentInfo commentInfo=commentservice.CreateComment(request,postid,userId);
         return ResponseEntity.ok(ResultResponse.of(CREAT_COMMENT_SUCCESS,commentInfo));
     }
 
@@ -41,12 +43,12 @@ public class CommentController {
 
     }
 
-    @GetMapping("/user/{userid}")
+    @GetMapping("/user/")
     public ResponseEntity<ResultResponse> GetUserComment(
-            @PathVariable Long userid
+            @SessionAttribute(name="LoginUser",required = true) Long userId
     ){
         List<CommentInfo> usercommentInfoList=new ArrayList<>();
-        usercommentInfoList=commentservice.GetUserCommentList(userid);
+        usercommentInfoList=commentservice.GetUserCommentList(userId);
         return ResponseEntity.ok(ResultResponse.of(GET_ALL_COMMENT_SUCCESS,usercommentInfoList));
     }
 

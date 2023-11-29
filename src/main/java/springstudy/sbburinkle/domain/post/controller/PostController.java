@@ -50,9 +50,12 @@ public class PostController {
         return ResponseEntity.ok(ResultResponse.of(GET_POST_SUCCESS,postInfo));
     }
 
-    @GetMapping("/user/{userid}")
+    @GetMapping("/user")
     public ResponseEntity<ResultResponse> GetUserPost(
-            @PathVariable Long userid){
+            @PathVariable Long userid,
+            @SessionAttribute(name="LoginUser",required = true) Long userId
+            )
+            {
         List<PostInfo> postInfoList=new ArrayList<>();
         postInfoList=postService.GetAllUserPost(userid);
         return ResponseEntity.ok(ResultResponse.of(GET_ALL_POST_SUCCESS,postInfoList));
